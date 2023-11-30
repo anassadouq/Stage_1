@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\contact;
-use App\Models\Client;
-use App\Models\pov;
-
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -12,33 +9,28 @@ class ContactController extends Controller
 
     public function index()
     {
-       return contact::all();
+       return Contact::all();
     }
 
     public function store(Request $request)
     {
-        return contact::create($request->all());
-    }
-
-    public function show($id)
-    {
-        //
+        return Contact::create($request->all());
     }
 
     public function update(Request $request, $id)
     {
-        $contact=contact::find($id);
+        $contact=Contact::find($id);
         $contact->update($request->all());
         return $contact;
     }
 
-    public function destroy($id)
-    {
-        return contact::destroy($id);
+    public function searchClient($id){
+        $type=Contact::find($id)->clientModels;
+        return $type;
     }
 
-    public function searchClient($id){
-        $type=contact::find($id)->clientModels;
-        return $type;
+    public function destroy($id)
+    {
+        return Contact::destroy($id);
     }
 }

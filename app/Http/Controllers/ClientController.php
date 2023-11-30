@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Models\Client;
-use App\Models\pov;
-use App\Models\contact;
-
-
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -20,11 +16,6 @@ class ClientController extends Controller
         return Client::create($request->all());
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function update(Request $request, $id)
     {
         $client=client::find($id);
@@ -32,18 +23,13 @@ class ClientController extends Controller
         return $client;
     }
 
-    public function destroy($id)
-    {
-        return client::destroy($id);
-    }
-
     public function search($name)
     {
-        return client::where ('name','like','%'.$name.'%')->get();
+        return Client::where ('name','like','%'.$name.'%')->get();
     }
 
-    public function searchPov($id){
-        $type=client::find($id)->povModels;
-        return $type;
+    public function destroy($id)
+    {
+        return Client::destroy($id);
     }
 }
